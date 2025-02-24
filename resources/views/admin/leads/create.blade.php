@@ -112,7 +112,28 @@
                                 <div class="mb-3">
                                     <label for="leadStatus" class="form-label">Status</label>
                                     <select id="leadStatus" name="status" class="form-select" @readonly(true)>
-                                        <option value="new">New</option>
+                                        <option value="">Select Status</option>
+                                        <option value="Fresh" {{ old('status') == 'Fresh' ? 'selected' : '' }}>Fresh
+                                        </option>
+                                        <option value="Site Survey Done"
+                                            {{ old('status') == 'Site Survey Done' ? 'selected' : '' }}>Site Survey Done
+                                        </option>
+                                        <option value="Engineering Design"
+                                            {{ old('status') == 'Engineering Design' ? 'selected' : '' }}>Engineering Design
+                                        </option>
+                                        <option value="Proposal Sent"
+                                            {{ old('status') == 'Proposal Sent' ? 'selected' : '' }}>
+                                            Proposal Sent
+                                        </option>
+                                        <option value="Commercials Finalized"
+                                            {{ old('status') == 'Commercials Finalized' ? 'selected' : '' }}>
+                                            Commercials Finalized
+                                        </option>
+                                        <option value="PO Received" {{ old('status') == 'PO Received' ? 'selected' : '' }}>
+                                            PO Received
+                                        </option>
+                                        <option value="Cold" {{ old('status') == 'Cold' ? 'selected' : '' }}>Cold
+                                        </option>
                                     </select>
 
                                     @error('status')

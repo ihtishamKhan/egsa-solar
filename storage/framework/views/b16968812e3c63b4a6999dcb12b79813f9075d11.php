@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -76,61 +76,75 @@
                     </div>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <th>Interested In</th>
-                                            <td><?php echo e($lead->interest_in); ?></td>
-                                            <th>Installation Location</th>
-                                            <td><?php echo e($lead->installation_location); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Surface Orientation</th>
-                                            <td><?php echo e($lead->surface_orientation); ?></td>
-                                            <th>Ownership Status</th>
-                                            <td><?php echo e($lead->ownership_status); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Surface Age</th>
-                                            <td><?php echo e($lead->Surface_age); ?></td>
-                                            <th>Power Consumption</th>
-                                            <td><?php echo e($lead->power_consumption); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Sunny Area (sqm)</th>
-                                            <td><?php echo e($lead->sunny_area_sqm); ?></td>
-                                            <th>Storage Interest</th>
-                                            <td><?php echo e($lead->storage_interest); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Surface Inclination</th>
-                                            <td><?php echo e($lead->surface_inclination); ?></td>
-                                            <th>Purchase Type</th>
-                                            <td><?php echo e($lead->purchase_type); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Additional Interests</th>
-                                            <td><?php echo e($lead->additional_interests); ?></td>
-                                            <th>Additional Information</th>
-                                            <td><?php echo e($lead->additional_information); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Date</th>
-                                            <td><?php echo e($lead->date); ?></td>
-                                            <th>Status</th>
-                                            <td>
-                                                <span
-                                                    class="badge badge-<?php echo e($lead->status == 'New' ? 'primary' : ($lead->status == 'In Progress' ? 'warning' : 'success')); ?>"><?php echo e($lead->status); ?>
+                            <div class="mb-3">
+                                <label for="leadStatus" class="form-label">Status</label>
+                                <select class="form-select" id="leadStatus" name="status">
+                                    <option value="">Select Status</option>
+                                    <option value="Fresh" <?php echo e($lead->status == 'Fresh' ? 'selected' : ''); ?>>Fresh</option>
+                                    <option value="Site Survey Done"
+                                        <?php echo e($lead->status == 'Site Survey Done' ? 'selected' : ''); ?>>Site Survey Done
+                                    </option>
+                                    <option value="Engineering Design"
+                                        <?php echo e($lead->status == 'Engineering Design' ? 'selected' : ''); ?>>Engineering Design
+                                    </option>
+                                    <option value="Proposal Sent" <?php echo e($lead->status == 'Proposal Sent' ? 'selected' : ''); ?>>
+                                        Proposal Sent
+                                    </option>
+                                    <option value="Commercials Finalized"
+                                        <?php echo e($lead->status == 'Commercials Finalized' ? 'selected' : ''); ?>>
+                                        Commercials Finalized
+                                    </option>
+                                    <option value="PO Received" <?php echo e($lead->status == 'PO Received' ? 'selected' : ''); ?>>
+                                        PO Received
+                                    </option>
+                                    <option value="Cold" <?php echo e($lead->status == 'Cold' ? 'selected' : ''); ?>>Cold</option>
+                                </select>
+                            </div>
 
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="mb-3">
+                                <label for="nextAction" class="form-label">Next Action</label>
+                                <select class="form-select" id="nextAction" name="next_action">
+                                    <option value="">Select Next Action</option>
+                                    <option value="Site Survey"
+                                        <?php echo e($lead->next_action == 'Site Survey' ? 'selected' : ''); ?>>
+                                        Site Survey
+                                    </option>
+                                    <option value="Engineering Design"
+                                        <?php echo e($lead->next_action == 'Engineering Design' ? 'selected' : ''); ?>>
+                                        Engineering Design
+                                    </option>
+                                    <option value="Proposal" <?php echo e($lead->next_action == 'Proposal' ? 'selected' : ''); ?>>
+                                        Proposal
+                                    </option>
+                                    <option value="Commercials"
+                                        <?php echo e($lead->next_action == 'Commercials' ? 'selected' : ''); ?>>
+                                        Commercials
+                                    </option>
+                                    <option value="PO" <?php echo e($lead->next_action == 'PO' ? 'selected' : ''); ?>>PO</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="nextActionDate" class="form-label">Next Action Date</label>
+                                <input type="date" class="form-control" id="nextActionDate" name="next_action_date"
+                                    value="<?php echo e($lead->next_action_date); ?>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="nextActionOwner" class="form-label">Next Action Owner</label>
+                                <select class="form-select" id="nextActionOwner" name="next_action_owner">
+                                    <option value="">Select Next Action Owner</option>
+                                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($user->id); ?>"
+                                            <?php echo e($lead->next_action_owner == $user->id ? 'selected' : ''); ?>>
+                                            <?php echo e($user->name); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
                             </div>
                         </div>
                     </div>

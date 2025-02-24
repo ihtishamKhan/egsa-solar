@@ -56,7 +56,7 @@
                                             <label for="username" class="form-label">Email</label>
                                             <input name="email" type="email"
                                                 class="form-control @error('email') is-invalid @enderror"
-                                                value="{{ old('email', 'tamim@egs-solar.de') }}" id="username"
+                                                value="{{ old('email', 'admin@egsa-solar.com') }}" id="username"
                                                 placeholder="Enter Email" autocomplete="email" autofocus>
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">

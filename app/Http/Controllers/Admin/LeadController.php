@@ -53,12 +53,13 @@ class LeadController extends Controller
 
         $new= new Lead();
         $new->created_by = auth()->user()->id;
-        $new->assigned_to = $request->user_id;
+        $new->assigned_to = $request->assign_to;
         $new->title = $request->title;
         $new->first_name = $request->first_name;
         $new->last_name = $request->last_name;
         $new->contact_number = $request->contact_number;
         $new->additional_number = $request->additional_number;
+        $new->status = $request->status;
         $new->save();
 
         return redirect()->route('leads.index')->with('success', 'Lead created successfully.');
@@ -67,12 +68,50 @@ class LeadController extends Controller
     public function show($uuid)
     {
         $lead = Lead::where('uuid', $uuid)->with(['createdBy', 'assignedTo'])->first();
+        $users = User::role('Employee')->get();
 
         if(!$lead) {
             return redirect()->back()->with('error', 'Lead not found.');
         }
 
-        return view('admin.leads.show', compact('lead'));
+        return view('admin.leads.show', compact('lead', 'users'));
+    }
+
+    public function siteSurvey($uuid)
+    {
+        $lead = Lead::where('uuid', $uuid)->first();
+
+        if(!$lead) {
+            return redirect()->back()->with('error', 'Lead not found.');
+        }
+
+        return view('admin.leads.site-survey', compact('lead'));
+    }
+
+    public function siteSurveyUpdate(Request $request, $uuid)
+    {
+        $lead = Lead::where('uuid', $uuid)->first();
+
+        if(!$lead) {
+            return redirect()->back()->with('error', 'Lead not found.');
+        }
+
+        $lead->interest_in = $request->interest_in;
+        $lead->installation_location = $request->installation_location;
+        $lead->surface_orientation = $request->surface_orientation;
+        $lead->ownership_status = $request->ownership_status;
+        $lead->surface_age = $request->surface_age;
+        $lead->power_consumption = $request->power_consumption;
+        $lead->sunny_area_sqm = $request->sunny_area_sqm;
+        $lead->storage_interest = $request->storage_interest;
+        $lead->surface_inclination = $request->surface_inclination;
+        $lead->purchase_type = $request->purchase_type;
+        $lead->additional_interests = $request->additional_interests;
+        $lead->additional_information = $request->additional_information;
+        $lead->date = $request->date;
+        $lead->save();
+
+        return redirect()->back()->with('success', 'Site Survey updated successfully.');
     }
     
     public function files($uuid)

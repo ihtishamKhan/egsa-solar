@@ -9,6 +9,14 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('leads.siteSurvey') ? 'active' : '' }}"
+                href="{{ route('leads.siteSurvey', $lead->uuid) }}" role="tab">
+                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                <span class="d-none d-sm-block">Site Survey</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('leads.products') ? 'active' : '' }}"
                 href="{{ route('leads.products', $lead->uuid) }}" role="tab">
                 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>

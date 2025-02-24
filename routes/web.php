@@ -52,6 +52,9 @@ Route::group(['prefix' => 'leads', 'as' => 'leads.', 'middleware' => 'auth'], fu
 
     Route::post('/import', [LeadController::class, 'import'])->name('import');
 
+    Route::get('/site-survey/{uuid}', [LeadController::class, 'siteSurvey'])->name('siteSurvey');
+    Route::put('/site-survey/{uuid}', [LeadController::class, 'siteSurveyUpdate'])->name('siteSurveyUpdate');
+
     Route::get('/products/{uuid}', [LeadController::class, 'products'])->name('products');
     Route::post('/add-products/{uuid}', [LeadController::class, 'addProducts'])->name('addProducts');
 

@@ -187,7 +187,28 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="mb-3">
                                     <label for="leadStatus" class="form-label">Status</label>
                                     <select id="leadStatus" name="status" class="form-select" <?php if(true): echo 'readonly'; endif; ?>>
-                                        <option value="new">New</option>
+                                        <option value="">Select Status</option>
+                                        <option value="Fresh" <?php echo e(old('status') == 'Fresh' ? 'selected' : ''); ?>>Fresh
+                                        </option>
+                                        <option value="Site Survey Done"
+                                            <?php echo e(old('status') == 'Site Survey Done' ? 'selected' : ''); ?>>Site Survey Done
+                                        </option>
+                                        <option value="Engineering Design"
+                                            <?php echo e(old('status') == 'Engineering Design' ? 'selected' : ''); ?>>Engineering Design
+                                        </option>
+                                        <option value="Proposal Sent"
+                                            <?php echo e(old('status') == 'Proposal Sent' ? 'selected' : ''); ?>>
+                                            Proposal Sent
+                                        </option>
+                                        <option value="Commercials Finalized"
+                                            <?php echo e(old('status') == 'Commercials Finalized' ? 'selected' : ''); ?>>
+                                            Commercials Finalized
+                                        </option>
+                                        <option value="PO Received" <?php echo e(old('status') == 'PO Received' ? 'selected' : ''); ?>>
+                                            PO Received
+                                        </option>
+                                        <option value="Cold" <?php echo e(old('status') == 'Cold' ? 'selected' : ''); ?>>Cold
+                                        </option>
                                     </select>
 
                                     <?php $__errorArgs = ['status'];
