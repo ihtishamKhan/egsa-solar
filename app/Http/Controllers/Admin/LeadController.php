@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Services\FileService;
 use App\Models\User;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class LeadController extends Controller
 {
@@ -63,6 +65,43 @@ class LeadController extends Controller
         $new->save();
 
         return redirect()->route('leads.index')->with('success', 'Lead created successfully.');
+    }
+
+    // Edit Lead 
+    public function edit($id)
+    {
+        $lead = Lead::find($id);
+        $employees = User::role('Employee')->get();
+        return view('admin.leads.edit', compact(['lead','employees']));
+    }
+    
+    // Update Lead
+    public function update(Request $request,$id)
+    {
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'contact_number' => 'required',
+        ]);
+
+        $lead = Lead::find($id);
+        
+        if ($lead) {
+            
+            $lead->title = $request->input('title');
+            $lead->first_name = $request->input('first_name');
+            $lead->last_name = $request->input('last_name');
+            $lead->contact_number = $request->input('contact_number');
+            $lead->additional_number = $request->input('additional_number');
+            $lead->status = $request->input('status');
+            $lead->assigned_to = $request->input('assigned_to');
+            $lead->save();
+        
+            return redirect()->route('leads.index')->with('success', 'Lead updated successfully');
+        } else {
+            return redirect()->route('leads.index')->with('error', 'Lead not found');
+        }
     }
 
     public function show($uuid)
@@ -233,7 +272,7 @@ class LeadController extends Controller
         // $lead->products()->sync($request->products);
 
         try {
-            \DB::transaction(function () use ($request, $lead) {
+            DB::transaction(function () use ($request, $lead) {
                 // $lead->products()->sync($request->products);
                 
                 // Process stock reduction for each product
@@ -258,4 +297,16 @@ class LeadController extends Controller
 
         return redirect()->back()->with('success', 'Products added successfully.');
     }
+
+
+    // Kanban View List 
+
+    public function kanban(Request $request)
+    {
+        $leads = Lead::all();
+        
+        return view('admin.leads.kanban', compact('leads'));
+    }
+
+
 }

@@ -7,97 +7,85 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title" key="t-menu">@lang('translation.Menu')</li>
+                <li class="menu-title" key="t-menu"><?php echo app('translator')->get('translation.Menu'); ?></li>
 
                 <li>
-                    <a href="{{ route('root') }}" class="waves-effect">
+                    <a href="<?php echo e(route('root')); ?>" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
 
-                @hasrole('Super Admin')
+                <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Super Admin')): ?>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-user-circle"></i>
                             <span key="t-employees">Employees</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('employees.index') }}" key="t-employees-list">Employees List</a></li>
-                            <li><a href="{{ route('employees.create') }}" key="t-create-employee">Create Employee</a></li>
+                            <li><a href="<?php echo e(route('employees.index')); ?>" key="t-employees-list">Employees List</a></li>
+                            <li><a href="<?php echo e(route('employees.create')); ?>" key="t-create-employee">Create Employee</a></li>
                         </ul>
                     </li>
-                @endhasrole
+                <?php endif; ?>
 
-                @hasrole('Super Admin|Employee')
+                <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Super Admin|Employee')): ?>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-user-circle"></i>
                             <span key="t-leads">Leads</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('leads.index') }}" key="t-leads-list">Leads List</a></li>
-                            <li><a href="{{ route('leads.create') }}" key="t-create-lead">Create Lead</a></li>
-                            <li><a href="{{ route('leads.kanban') }}" key="t-kanban-view">Kanban view</a></li>
+                            <li><a href="<?php echo e(route('leads.index')); ?>" key="t-leads-list">Leads List</a></li>
+                            <li><a href="<?php echo e(route('leads.create')); ?>" key="t-create-lead">Create Lead</a></li>
+                            <li><a href="<?php echo e(route('leads.kanban')); ?>" key="t-kanban-view">Kanban view</a></li>
                         </ul>
                     </li>
-                @endhasrole
+                <?php endif; ?>
 
-                @hasrole('Super Admin|Employee')
+                <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Super Admin|Employee')): ?>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-box"></i>
                             <span key="t-products">Products</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('products.index') }}" key="t-products-list">Products List</a></li>
-                            <li><a href="{{ route('products.create') }}" key="t-product-lead">Create Product</a></li>
+                            <li><a href="<?php echo e(route('products.index')); ?>" key="t-products-list">Products List</a></li>
+                            <li><a href="<?php echo e(route('products.create')); ?>" key="t-product-lead">Create Product</a></li>
                         </ul>
                     </li>
-                @endhasrole
+                <?php endif; ?>
 
-                @hasrole('Super Admin|Employee')
+                <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Super Admin|Employee')): ?>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-briefcase"></i>
                             <span key="t-products">Projects</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('projects.index') }}" key="t-projects-list">Projects List</a></li>
-                            <li><a href="{{ route('projects.create') }}" key="t-project-lead">Create Project</a></li>
+                            <li><a href="<?php echo e(route('projects.index')); ?>" key="t-projects-list">Projects List</a></li>
+                            <li><a href="<?php echo e(route('projects.create')); ?>" key="t-project-lead">Create Project</a></li>
                         </ul>
                     </li>
-                @endhasrole
+                <?php endif; ?>
 
-                @hasrole('Super Admin|Employee')
+                <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Super Admin|Employee')): ?>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-check-square"></i>
                             <span key="t-tasks">Tasks</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('tasks.index') }}" key="t-tasks-list">Tasks List</a></li>
-                            {{-- <li><a href="{{ route('tasks.create') }}" key="t-task-lead">Create Task</a></li> --}}
+                            <li><a href="<?php echo e(route('tasks.index')); ?>" key="t-tasks-list">Tasks List</a></li>
+                            
                         </ul>
                     </li>
-                @endhasrole
+                <?php endif; ?>
 
 
-                {{-- <li>
-                        <a href="{{ route('tasks.index') }}" class="waves-effect">
-                            <i class="bx bx-task"></i>
-                            <span key="t-tasks">Tasks</span>
-                        </a>
-                    </li> --}}
+                
 
-                {{-- @hasrole('Admin')
-                    <li>
-                        <a href="{{ route('expenses.index') }}" class="waves-effect">
-                            <i class="bx bx-dollar-circle"></i>
-                            <span key="t-file-manager">Expenses</span>
-                        </a>
-                    </li>
-                @endhasrole --}}
+                
 
             </ul>
         </div>
@@ -105,3 +93,4 @@
     </div>
 </div>
 <!-- Left Sidebar End -->
+<?php /**PATH D:\Projects\Git\egsa-solar\resources\views/layouts/sidebar.blade.php ENDPATH**/ ?>
