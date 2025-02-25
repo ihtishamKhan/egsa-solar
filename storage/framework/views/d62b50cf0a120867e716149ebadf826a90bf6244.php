@@ -1,33 +1,33 @@
-@extends('layouts.master')
 
-@section('title')
+
+<?php $__env->startSection('title'); ?>
     Leads List
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('css')
-    <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+<?php $__env->startSection('css'); ?>
+    <link href="<?php echo e(URL::asset('/assets/libs/datatables/datatables.min.css')); ?>" rel="stylesheet" type="text/css" />
+<?php $__env->stopSection(); ?>
 
-@section('content')
-    @component('components.breadcrumb')
-        @slot('li_1')
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('li_1'); ?>
             Leads
-        @endslot
-        @slot('title')
+        <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?>
             Leads List
-        @endslot
-    @endcomponent
+        <?php $__env->endSlot(); ?>
+    <?php echo $__env->renderComponent(); ?>
 
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="d-flex justify-content-between align-items-center p-2">
 
-                    @hasrole('Super Admin|Employee')
-                    <form method="GET" action="{{ route('leads.index') }}">
+                    <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Super Admin|Employee')): ?>
+                    <form method="GET" action="<?php echo e(route('leads.index')); ?>">
                     <div class="">
                                     <label for="leadStatus" class="form-label">Status</label>
-                                    <select id="leadStatus" name="status" class="form-select" @readonly(true) onchange="this.form.submit()">
+                                    <select id="leadStatus" name="status" class="form-select" <?php if(true): echo 'readonly'; endif; ?> onchange="this.form.submit()">
                                         <option value="">Filter By Status</option>
                                         <option value="Fresh" >Fresh
                                         </option>
@@ -52,18 +52,26 @@
                                         </option>
                                     </select>
 
-                                    @error('status')
+                                    <?php $__errorArgs = ['status'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                         <div class="invalid-feedback d-block">
-                                            {{ $message }}
+                                            <?php echo e($message); ?>
+
                                         </div>
-                                    @enderror
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
 </form>
                     
 
 <div class="col-md-3 d-flex justify-content-end">
                         <div class="text-end">
-                            <a class="btn btn-primary btn-sm text-light" href="{{ route('leads.create') }}">Add Leads</a>
+                            <a class="btn btn-primary btn-sm text-light" href="<?php echo e(route('leads.create')); ?>">Add Leads</a>
                         </div>
 
                         <div class="text-end mx-2">
@@ -74,7 +82,7 @@
                         </div>
 
 
-                        {{-- import lead --}}
+                        
                         <div id="importLeads" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -84,20 +92,34 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="{{ route('leads.import') }}" method="post" enctype="multipart/form-data">
-                                        @csrf
+                                    <form action="<?php echo e(route('leads.import')); ?>" method="post" enctype="multipart/form-data">
+                                        <?php echo csrf_field(); ?>
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="mb-3">
                                                         <label for="file" class="form-label required">Upload File</label>
                                                         <input type="file" name="file"
-                                                            class="form-control @error('file') is-invalid @enderror"
+                                                            class="form-control <?php $__errorArgs = ['file'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                                             id="file" required>
 
-                                                        @error('file')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
+                                                        <?php $__errorArgs = ['file'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                            <div class="text-danger"><?php echo e($message); ?></div>
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,7 +134,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endhasrole
+                    <?php endif; ?>
                 </div>
 
                 <div class="card-body">
@@ -129,31 +151,32 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($leads as $lead)
+                            <?php $__currentLoopData = $leads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lead): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td>{{ $lead->title }}</td>
-                                    <td>{{ $lead->first_name }} {{ $lead->last_name }}</td>
-                                    <td>{{ $lead->contact_number }}</td>
+                                    <td><?php echo e($lead->title); ?></td>
+                                    <td><?php echo e($lead->first_name); ?> <?php echo e($lead->last_name); ?></td>
+                                    <td><?php echo e($lead->contact_number); ?></td>
                                     <td>
-                                        @if ($lead->assignedTo)
-                                            {{ $lead->assignedTo->name }}
-                                        @else
+                                        <?php if($lead->assignedTo): ?>
+                                            <?php echo e($lead->assignedTo->name); ?>
+
+                                        <?php else: ?>
                                             <span class="text-danger">No User</span>
-                                        @endif
+                                        <?php endif; ?>
                                     </td>
-                                    <td>{{ $lead->status }}</td>
+                                    <td><?php echo e($lead->status); ?></td>
                                     <td>
-                                        <a href="{{ route('leads.show', $lead->uuid) }}">
+                                        <a href="<?php echo e(route('leads.show', $lead->uuid)); ?>">
                                             <button class="btn btn-primary btn-sm"><i class="fa fa-eye btn-action"></i>
                                             </button>
                                         </a>
-                                        <a href="{{ route('leads.edit', $lead->id) }}">
+                                        <a href="<?php echo e(route('leads.edit', $lead->id)); ?>">
                                             <button class="btn btn-info btn-sm"><i class="fa fa-edit btn-action"></i>
                                             </button>
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
 
@@ -161,10 +184,12 @@
             </div>
         </div> <!-- end col -->
     </div>
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
     <!-- Required datatable js -->
-    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+    <script src="<?php echo e(URL::asset('/assets/libs/datatables/datatables.min.js')); ?>"></script>
     <!-- Datatable init js -->
-    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
-@endsection
+    <script src="<?php echo e(URL::asset('/assets/js/pages/datatables.init.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Projects\Git\egsa-solar\resources\views/admin/leads/index.blade.php ENDPATH**/ ?>

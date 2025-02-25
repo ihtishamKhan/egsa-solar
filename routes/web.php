@@ -47,8 +47,10 @@ Route::group(['prefix' => 'leads', 'as' => 'leads.', 'middleware' => 'auth'], fu
     Route::post('/store', [LeadController::class, 'store'])->name('store');
     Route::get('/show/{uuid}', [LeadController::class, 'show'])->name('show');
     Route::get('/edit/{id}', [LeadController::class, 'edit'])->name('edit');
-    Route::put('/update/{id}', [LeadController::class, 'update'])->name('update');
+    Route::post('/update/{id}', [LeadController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [LeadController::class, 'destroy'])->name('destroy');
+
+    Route::get('/kanban', [LeadController::class, 'kanban'])->name('kanban');
 
     Route::post('/import', [LeadController::class, 'import'])->name('import');
 
