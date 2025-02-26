@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Services\FileService;
 use App\Models\User;
 use App\Models\Product;
+use Dotenv\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -28,14 +29,15 @@ class LeadController extends Controller
         $leads = Lead::query();
         $leads->with(['createdBy', 'assignedTo']);
 
-        
+        $status=$request->status;
         if($request->has('status') && $request->status != '') {
             $leads->where('status', $request->status);
+            // $status = 
         }
 
         $leads = $leads->get();
         
-        return view('admin.leads.index', compact('leads'));
+        return view('admin.leads.index', compact('leads','status'));
     }
 
     public function create()
@@ -223,7 +225,10 @@ class LeadController extends Controller
             'file' => 'required|mimes:csv,txt|max:2048'
         ]);
 
+
         try {
+
+
             $file = $request->file('file');
 
             $path = $file->storeAs('temp', 'import_' . time() . '.csv');
@@ -232,7 +237,8 @@ class LeadController extends Controller
 
             Storage::delete($path);
         } catch (\Exception $e) {
-            dd($e);
+            // dd($e);
+            Log::error($e);
             return redirect()->back()->with('error', 'Something went wrong. Please try again.');
         }
 
@@ -258,6 +264,7 @@ class LeadController extends Controller
 
     public function addProducts(Request $request, $uuid)
     {
+        
         $request->validate([
             'products' => 'required|array',
             'products.*' => 'exists:products,id'

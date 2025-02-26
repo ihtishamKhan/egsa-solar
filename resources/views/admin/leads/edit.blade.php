@@ -147,10 +147,11 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="assignTo" class="form-label">Assign to</label>
-                                    <select id="assignTo" name="assign_to" class="form-select" value="{{$lead->assigned_to}}">
+                                    <select id="assignTo" name="assign_to" class="form-select">
                                         <option value="{{ null }}">Choose</option>
                                         @foreach ($employees as $employee)
-                                            <option value="{{ $employee->id }}" {{ $lead->assigned_to == '$employee->id' ? 'selected' : '' }}>{{ $employee->name }}</option>
+                                            <option value="{{ $employee->id }}"  {{ $lead->assigned_to === $employee->id ? 'selected' : '' }}
+                                                >{{ $employee->name }}</option>
                                         @endforeach
                                     </select>
 

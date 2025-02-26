@@ -6,6 +6,15 @@
 
 <?php $__env->startSection('css'); ?>
     <link href="<?php echo e(URL::asset('/assets/libs/datatables/datatables.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <style>
+        td {
+    max-width: 500px;
+    min-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+    </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -228,12 +237,12 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <div class="card-body">
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 display nowrap"  style="width:100%">
                         <thead>
                             <tr>
                                 <th>Assigned To</th>
                                 <th>Title</th>
-                                <th>Description</th>
+                                 <th class="w-75">Description</th>
                                 <th>Priority</th>
                                 <th>Status</th>
                                 <th>Created At</th>
@@ -246,7 +255,7 @@ unset($__errorArgs, $__bag); ?>
                                 <tr>
                                     <td><?php echo e($task->assignedTo->name); ?></td>
                                     <td><?php echo e($task->title); ?></td>
-                                    <td><?php echo e($task->description); ?></td>
+                                    <td ><?php echo e($task->description); ?></td>
                                     
                                     <td>
                                         <?php if($task->priority == 'low'): ?>
@@ -260,7 +269,7 @@ unset($__errorArgs, $__bag); ?>
                                     <td>
                                         <?php if($task->status == 'created'): ?>
                                             <span class="badge bg-warning">Created</span>
-                                        <?php elseif($task->status == 'in-progress'): ?>
+                                        <?php elseif($task->status == 'pending'): ?>
                                             <span class="badge bg-info">In Progress</span>
                                         <?php else: ?>
                                             <span class="badge bg-success">Completed</span>

@@ -48,7 +48,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        id="title" name="title" placeholder="Lead title">
+                                        id="title" name="title" placeholder="Lead title" value="<?php echo e(old('title')); ?>">
 
                                     <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -77,7 +77,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        id="firstName" name="first_name" placeholder="Enter first name">
+                                        id="firstName" name="first_name" placeholder="Enter first name" value="<?php echo e(old('first_name')); ?>">
 
                                     <?php $__errorArgs = ['first_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -106,7 +106,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        id="firstName" name="last_name" placeholder="Enter last name">
+                                        id="firstName" name="last_name" placeholder="Enter last name" value="<?php echo e(old('last_name')); ?>">
 
                                     <?php $__errorArgs = ['last_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -135,7 +135,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        id="contactNumber" name="contact_number" placeholder="Contact number">
+                                        id="contactNumber" name="contact_number" placeholder="Contact number" value="<?php echo e(old('contact_number')); ?>">
 
                                     <?php $__errorArgs = ['contact_number'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -165,7 +165,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        id="additionalNumber" name="additional_number" placeholder="Additional number">
+                                        id="additionalNumber" name="additional_number" placeholder="Additional number" value="<?php echo e(old('additional_number')); ?>">
 
                                     <?php $__errorArgs = ['additional_number'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -186,7 +186,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="leadStatus" class="form-label">Status</label>
-                                    <select id="leadStatus" name="status" class="form-select" <?php if(true): echo 'readonly'; endif; ?>>
+                                    <select id="leadStatus" name="status" class="form-select" <?php if(true): echo 'readonly'; endif; ?> value="<?php echo e(old('status')); ?>">
                                         <option value="">Select Status</option>
                                         <option value="Fresh" <?php echo e(old('status') == 'Fresh' ? 'selected' : ''); ?>>Fresh
                                         </option>
