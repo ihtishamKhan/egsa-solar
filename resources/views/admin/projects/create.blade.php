@@ -76,7 +76,7 @@
                                 <div class="mb-3">
                                     <label for="client" class="form-label">Client</label>
                                     <input type="text" class="form-control @error('client') is-invalid @enderror"
-                                        id="client" name="client" placeholder="Client Name" value="{{ old('client') }}">
+                                        id="client" name="client_name" placeholder="Client Name" value="{{ old('client') }}">
                                     {{-- <select class="form-select @error('client') is-invalid @enderror" id="client"
                                         name="client">
                                         <option value="">Select Client</option>
@@ -108,7 +108,7 @@
                                 <div class="mb-3">
                                     <label for="due-date" class="form-label">Due Date</label>
                                     <input type="date" class="form-control @error('due_date') is-invalid @enderror"
-                                        id="due-date" name="due_date" value="{{ old('due_date') }}">
+                                        id="due-date" name="end_date" value="{{ old('due_date') }}">
                                 </div>
                             </div>
 

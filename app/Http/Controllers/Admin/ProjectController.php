@@ -26,7 +26,7 @@ class ProjectController extends Controller
             'title' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'client' => 'required',
+            'client_name' => 'required',
             'budget' => 'required',
         ]);
 

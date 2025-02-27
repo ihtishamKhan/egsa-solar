@@ -6,6 +6,15 @@
 
 @section('css')
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        td {
+    max-width: 500px;
+    min-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+    </style>
 @endsection
 
 @section('content')
@@ -155,12 +164,12 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 display nowrap"  style="width:100%">
                         <thead>
                             <tr>
                                 <th>Assigned To</th>
                                 <th>Title</th>
-                                <th>Description</th>
+                                 <th class="w-75">Description</th>
                                 <th>Priority</th>
                                 <th>Status</th>
                                 <th>Created At</th>
@@ -173,7 +182,7 @@
                                 <tr>
                                     <td>{{ $task->assignedTo->name }}</td>
                                     <td>{{ $task->title }}</td>
-                                    <td>{{ $task->description }}</td>
+                                    <td >{{ $task->description }}</td>
                                     {{-- priority and status column should be in bootstrap bubble with respect to colors --}}
                                     <td>
                                         @if ($task->priority == 'low')
@@ -187,7 +196,7 @@
                                     <td>
                                         @if ($task->status == 'created')
                                             <span class="badge bg-warning">Created</span>
-                                        @elseif ($task->status == 'in-progress')
+                                        @elseif ($task->status == 'pending')
                                             <span class="badge bg-info">In Progress</span>
                                         @else
                                             <span class="badge bg-success">Completed</span>

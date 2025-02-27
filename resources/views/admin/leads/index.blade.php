@@ -28,27 +28,27 @@
                     <div class="">
                                     <label for="leadStatus" class="form-label">Status</label>
                                     <select id="leadStatus" name="status" class="form-select" @readonly(true) onchange="this.form.submit()">
-                                        <option value="">Filter By Status</option>
-                                        <option value="Fresh" >Fresh
+                                        <option value="" selected>Filter By Status</option>
+                                        <option value="Fresh" {{ $status == "Fresh" ? 'selected' : '' }}>Fresh
                                         </option>
-                                        <option value="Site Survey Done"
+                                        <option value="Site Survey Done" {{ $status == "Site Survey Done" ? 'selected' : '' }}
                                         >Site Survey Done
                                         </option>
-                                        <option value="Engineering Design"
+                                        <option value="Engineering Design" {{ $status == "Engineering Design" ? 'selected' : '' }}
                                         >Engineering Design
                                         </option>
-                                        <option value="Proposal Sent" value='selected'
+                                        <option value="Proposal Sent" {{ $status == "Proposal Sent" ? 'selected' : '' }}
                                         >
                                             Proposal Sent
                                         </option>
-                                        <option value="Commercials Finalized" select
+                                        <option value="Commercials Finalized" {{ $status == "Commercials Finalized" ? 'selected' : '' }}
                                             >
                                             Commercials Finalized
                                         </option>
-                                        <option value="PO Received" >
+                                        <option value="PO Received" {{ $status == "PO Received" ? 'selected' : '' }}>
                                             PO Received
                                         </option>
-                                        <option value="Cold" >Cold
+                                        <option value="Cold" {{ $status == "Cold" ? 'selected' : '' }}>Cold
                                         </option>
                                     </select>
 
@@ -95,7 +95,7 @@
                                                             class="form-control @error('file') is-invalid @enderror"
                                                             id="file" required>
 
-                                                        @error('file')
+                                                            @error('file')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
@@ -167,4 +167,5 @@
     <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
     <!-- Datatable init js -->
     <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
+
 @endsection

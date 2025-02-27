@@ -41,7 +41,7 @@
                                 <div class="mb-3">
                                     <label for="title" class="form-label required">Title</label>
                                     <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                        id="title" name="title" placeholder="Lead title">
+                                        id="title" name="title" placeholder="Lead title" value="{{ old('title') }}">
 
                                     @error('title')
                                         <div class="invalid-feedback d-block">
@@ -55,7 +55,7 @@
                                 <div class="mb-3">
                                     <label for="firstName" class="form-label required">First Name</label>
                                     <input type="text" class="form-control @error('first_name') is-invalid @enderror"
-                                        id="firstName" name="first_name" placeholder="Enter first name">
+                                        id="firstName" name="first_name" placeholder="Enter first name" value="{{ old('first_name') }}">
 
                                     @error('first_name')
                                         <div class="invalid-feedback d-block">
@@ -69,7 +69,7 @@
                                 <div class="mb-3">
                                     <label for="lastName" class="form-label required">Last Name</label>
                                     <input type="text" class="form-control @error('last_name') is-invalid @enderror"
-                                        id="firstName" name="last_name" placeholder="Enter last name">
+                                        id="firstName" name="last_name" placeholder="Enter last name" value="{{ old('last_name') }}">
 
                                     @error('last_name')
                                         <div class="invalid-feedback d-block">
@@ -83,7 +83,7 @@
                                 <div class="mb-3">
                                     <label for="contactNumber" class="form-label required">Contact Number</label>
                                     <input type="text" class="form-control @error('contact_number') is-invalid @enderror"
-                                        id="contactNumber" name="contact_number" placeholder="Contact number">
+                                        id="contactNumber" name="contact_number" placeholder="Contact number" value="{{ old('contact_number') }}">
 
                                     @error('contact_number')
                                         <div class="invalid-feedback d-block">
@@ -98,7 +98,7 @@
                                     <label for="additionalNumber" class="form-label">Additional Number</label>
                                     <input type="text"
                                         class="form-control @error('additional_number') is-invalid @enderror"
-                                        id="additionalNumber" name="additional_number" placeholder="Additional number">
+                                        id="additionalNumber" name="additional_number" placeholder="Additional number" value="{{ old('additional_number') }}">
 
                                     @error('additional_number')
                                         <div class="invalid-feedback d-block">
@@ -111,7 +111,7 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="leadStatus" class="form-label">Status</label>
-                                    <select id="leadStatus" name="status" class="form-select" @readonly(true)>
+                                    <select id="leadStatus" name="status" class="form-select" @readonly(true) value="{{ old('status') }}">
                                         <option value="">Select Status</option>
                                         <option value="Fresh" {{ old('status') == 'Fresh' ? 'selected' : '' }}>Fresh
                                         </option>

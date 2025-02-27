@@ -59,7 +59,7 @@
                                                 name="ownership_status" value="<?php echo e($lead->ownership_status); ?>">
                                         </div>
                                     </div>
-
+<!-- 
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="surfaceOrientation" class="form-label">Surface
@@ -75,7 +75,7 @@
                                             <input type="text" class="form-control" id="ownershipStatus"
                                                 name="ownership_status" value="<?php echo e($lead->ownership_status); ?>">
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-6">
                                         <div class="mb-3">

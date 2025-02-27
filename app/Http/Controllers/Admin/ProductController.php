@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
@@ -25,9 +26,8 @@ class ProductController extends Controller
                 'description' => 'nullable|string',
                 'price' => 'required|numeric|min:0',
                 'initial_quantity' => 'required|integer|min:0',
-                'notes' => 'nullable|string'
             ]);
-
+            
             $product = DB::transaction(function () use ($validated, $request) {
                 $product = Product::create([
                     'name' => $validated['name'],
@@ -35,6 +35,7 @@ class ProductController extends Controller
                     'price' => $validated['price'],
                     'quantity' => $validated['initial_quantity']
                 ]);
+                
 
                 // If there's initial quantity, create a stock record
                 if ($validated['initial_quantity'] > 0) {
@@ -52,6 +53,7 @@ class ProductController extends Controller
 
                 // return $product;
             });
+            // dd($product);
 
             // Return success response
             return redirect()->back()->with('success', 'Product created successfully');
@@ -61,11 +63,15 @@ class ProductController extends Controller
 
         } catch (\Exception $e) {
             // Log the error for debugging
-            \Log::error('Product creation failed: ' . $e->getMessage());
+            Log::error('Product creation failed: ' . $e->getMessage());
 
             return redirect()->back()->with('error', 'An error occurred while creating the product');
         }
     
+    }
+    public function create()
+    {
+        return view('admin.products.create');
     }
 
     public function show($id)

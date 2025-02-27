@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIControllers\JobController;
 use App\Http\Controllers\APIControllers\AuthController;
+use App\Http\Controllers\APIControllers\LeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', [AuthController::class, 'login']);
+
+// Leads Api 
+Route::get('/leads', [LeadController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/leads', [LeadController::class, 'store'])->middleware('auth:sanctum');
+
 
 // Get all jobs api/controller with middleware
 Route::get('/jobs', [JobController::class, 'index'])->middleware('auth:sanctum');

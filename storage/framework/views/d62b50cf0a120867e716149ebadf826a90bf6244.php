@@ -28,27 +28,31 @@
                     <div class="">
                                     <label for="leadStatus" class="form-label">Status</label>
                                     <select id="leadStatus" name="status" class="form-select" <?php if(true): echo 'readonly'; endif; ?> onchange="this.form.submit()">
-                                        <option value="">Filter By Status</option>
-                                        <option value="Fresh" >Fresh
+                                        <option value="" selected>Filter By Status</option>
+                                        <option value="Fresh" <?php echo e($status == "Fresh" ? 'selected' : ''); ?>>Fresh
                                         </option>
-                                        <option value="Site Survey Done"
+                                        <option value="Site Survey Done" <?php echo e($status == "Site Survey Done" ? 'selected' : ''); ?>
+
                                         >Site Survey Done
                                         </option>
-                                        <option value="Engineering Design"
+                                        <option value="Engineering Design" <?php echo e($status == "Engineering Design" ? 'selected' : ''); ?>
+
                                         >Engineering Design
                                         </option>
-                                        <option value="Proposal Sent" value='selected'
+                                        <option value="Proposal Sent" <?php echo e($status == "Proposal Sent" ? 'selected' : ''); ?>
+
                                         >
                                             Proposal Sent
                                         </option>
-                                        <option value="Commercials Finalized" select
+                                        <option value="Commercials Finalized" <?php echo e($status == "Commercials Finalized" ? 'selected' : ''); ?>
+
                                             >
                                             Commercials Finalized
                                         </option>
-                                        <option value="PO Received" >
+                                        <option value="PO Received" <?php echo e($status == "PO Received" ? 'selected' : ''); ?>>
                                             PO Received
                                         </option>
-                                        <option value="Cold" >Cold
+                                        <option value="Cold" <?php echo e($status == "Cold" ? 'selected' : ''); ?>>Cold
                                         </option>
                                     </select>
 
@@ -110,7 +114,7 @@ endif;
 unset($__errorArgs, $__bag); ?>"
                                                             id="file" required>
 
-                                                        <?php $__errorArgs = ['file'];
+                                                            <?php $__errorArgs = ['file'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -190,6 +194,7 @@ unset($__errorArgs, $__bag); ?>
     <script src="<?php echo e(URL::asset('/assets/libs/datatables/datatables.min.js')); ?>"></script>
     <!-- Datatable init js -->
     <script src="<?php echo e(URL::asset('/assets/js/pages/datatables.init.js')); ?>"></script>
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Projects\Git\egsa-solar\resources\views/admin/leads/index.blade.php ENDPATH**/ ?>
